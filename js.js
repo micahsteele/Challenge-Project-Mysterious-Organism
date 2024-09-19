@@ -52,24 +52,33 @@ const returnRandBase = () => {
           numberOfTimes++
         }
         }
-      console.log(numberOfTimes)
       if(numberOfTimes >= 9) {
-        console.log('true')
         return true
       } else {
-        console.log('false')
         return false
       }
       }
     }
-  }
-  
-  
+  };
   
   const test = pAequorFactory(1, mockUpStrand());
   const test2 = pAequorFactory(2, mockUpStrand());
   console.log(test);
   test.mutate();
-  console.log('mutated: ' + test.dna)
-  test.compareDNA(test2)
-  test.willLikelySurvive()
+  console.log('mutated: ' + test.dna);
+  test.compareDNA(test2);
+  test.willLikelySurvive();
+  
+  function createTestRequests(num) {
+    const testRequests = [];
+    let id = 1;
+    while(testRequests.length < num) {
+      const testDNA = pAequorFactory(id, mockUpStrand)
+      if(testDNA.willLikelySurvive()) {
+        testRequests.push(testDNA)
+        id++
+      }
+    }
+    return testRequests
+  }
+  console.log(createTestRequests(30))
